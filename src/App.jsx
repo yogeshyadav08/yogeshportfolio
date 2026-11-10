@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ThemeProvider,
   createTheme,
@@ -15,6 +16,8 @@ import {
   Grid,
   IconButton,
   Divider,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -25,6 +28,9 @@ import CodeIcon from "@mui/icons-material/Code";
 import StorageIcon from "@mui/icons-material/Storage";
 import BrushIcon from "@mui/icons-material/Brush";
 import BuildIcon from "@mui/icons-material/Build";
+import MenuIcon from "@mui/icons-material/Menu";
+import DownloadIcon from "@mui/icons-material/Download";
+import cvFile from "./assest/Yogesh Resumed.pdf";
 
 const theme = createTheme({
   palette: {
@@ -193,6 +199,9 @@ function Section({ id, label, title, children }) {
 
 export default function App() {
   const nav = ["About", "Skills", "Projects", "Journey", "Contact"];
+  const [mobileMenuAnchor, setMobileMenuAnchor] = useState(null);
+  const mobileMenuOpen = Boolean(mobileMenuAnchor);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -224,6 +233,89 @@ export default function App() {
                 </Button>
               ))}
             </Stack>
+            <Button
+              href={cvFile}
+              download="Yogesh-Yadav-CV.pdf"
+              variant="contained"
+              color="primary"
+              size="small"
+              aria-label="Download CV"
+              startIcon={<DownloadIcon />}
+              sx={{
+                ml: { xs: 0, md: 1.5 },
+                minWidth: { xs: 0, md: "auto" },
+                px: { xs: 1.25, md: 2 },
+                whiteSpace: "nowrap",
+              }}
+            >
+              <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
+                Download CV
+              </Box>
+              <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+                CV
+              </Box>
+            </Button>
+            <IconButton
+              color="inherit"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls={
+                mobileMenuOpen ? "mobile-navigation-menu" : undefined
+              }
+              disableRipple
+              onClick={(event) =>
+                setMobileMenuAnchor(mobileMenuOpen ? null : event.currentTarget)
+              }
+              sx={{
+                display: { xs: "inline-flex", md: "none" },
+                ml: 1,
+                "&:hover": { bgcolor: "transparent" },
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="mobile-navigation-menu"
+              anchorEl={mobileMenuAnchor}
+              open={mobileMenuOpen}
+              onClose={() => setMobileMenuAnchor(null)}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              transformOrigin={{ vertical: "top", horizontal: "right" }}
+              slotProps={{
+                paper: {
+                  sx: {
+                    mt: 1,
+                    minWidth: 220,
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    backgroundImage:
+                      "linear-gradient(145deg, rgba(28,32,38,0.98), rgba(17,19,23,0.98))",
+                    boxShadow: "0 16px 40px rgba(0,0,0,0.4)",
+                    "& .MuiList-root": { p: 1 },
+                  },
+                },
+              }}
+            >
+              {nav.map((n) => (
+                <MenuItem
+                  key={n}
+                  component="a"
+                  href={`#${n.toLowerCase()}`}
+                  onClick={() => setMobileMenuAnchor(null)}
+                  sx={{
+                    minHeight: 48,
+                    borderRadius: 1.5,
+                    mb: 0.5,
+                    "&:last-child": { mb: 0 },
+                    "&:hover": {
+                      color: "primary.main",
+                      bgcolor: "rgba(245,165,36,0.1)",
+                    },
+                  }}
+                >
+                  {n}
+                </MenuItem>
+              ))}
+            </Menu>
           </Toolbar>
         </Container>
       </AppBar>
@@ -413,7 +505,7 @@ export default function App() {
                 {
                   icon: <LinkedInIcon />,
                   text: "linkedin.com/in/yogesh-yadav",
-                  href: "https://www.linkedin.com/in/yogesh-yadav/",
+                  href: "https://www.linkedin.com/in/yogesh-yadav-95463b205/",
                 },
               ].map((c) => (
                 <Grid key={c.text} size={{ xs: 12, sm: 6 }}>
