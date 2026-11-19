@@ -248,10 +248,16 @@ export default function App() {
                 whiteSpace: "nowrap",
               }}
             >
-              <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
+              <Box
+                component="span"
+                sx={{ display: { xs: "none", md: "inline" } }}
+              >
                 Download CV
               </Box>
-              <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+              <Box
+                component="span"
+                sx={{ display: { xs: "inline", md: "none" } }}
+              >
                 CV
               </Box>
             </Button>
@@ -380,7 +386,7 @@ export default function App() {
               <GitHubIcon />
             </IconButton>
             <IconButton
-              href="https://www.linkedin.com/in/yogesh-yadav/"
+              href="https://www.linkedin.com/in/yogesh-yadav-95463b205/"
               target="_blank"
             >
               <LinkedInIcon />
